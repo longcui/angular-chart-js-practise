@@ -1,3 +1,7 @@
+## TODO
+fix error: ERROR Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: ''. Current value: '[object Object]'.. Find more at https://angular.io/errors/NG0100
+
+
 # AngularChartJsPractise
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
