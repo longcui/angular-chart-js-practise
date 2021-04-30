@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartData } from 'chart.js';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Chart, ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-root',
@@ -16,20 +16,35 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor() { }
   ngOnInit(): void {
-    const data: ChartData = {
-      // label for the each data within dataset, seems not working, use xAxes instead
-      // labels: [new Date("2016-12-25"), new Date("2016-12-27")],  
-      datasets: [
-        {
-          label: "a",  //category label for the dataset
-          data: [{x: new Date("2016-12-25"), y:20}, {x: new Date("2016-12-26"), y:10}, {x: new Date("2016-12-27"), y:60}]
-        }
-      ]
-    };
 
     this.config = {
-      type: 'line',
-      data,
+      type: 'bar',
+      data: {
+        // label for the data within dataset, seems not working, use xAxes instead
+        // labels: [new Date("2016-12-25"), new Date("2016-12-27")],  
+        datasets: [
+          {
+            label: "a",  //category label for the dataset
+            type: "bar",
+            backgroundColor: "red",
+            data: [
+              { x: new Date("2016-12-25"), y: 20 },
+              { x: new Date("2016-12-26"), y: 44 },
+              { x: new Date("2017-02-27"), y: 50 },
+              { x: new Date("2017-12-28"), y: 60 }]
+          },
+          {
+            label: "ab",  //category label for the dataset
+            type: "line",
+            backgroundColor: "",
+            data: [
+              { x: new Date("2016-12-25"), y: 20 },
+              { x: new Date("2016-12-26"), y: -60 },
+              { x: new Date("2017-2-27"), y: 10 },
+              { x: new Date("2017-12-28"), y: 170 }]
+          }
+        ]
+      },
       options: {
         scales: {
           // x: {
@@ -37,19 +52,29 @@ export class AppComponent implements OnInit, AfterViewInit {
           // }
           xAxes: [{
             type: "time",
-            time: {
-              unit: 'day',
-              round: 'day',
-              displayFormats: {
-                day: 'MMM D'
+            // time: {
+            //   unit: 'month',
+            //   round: 'day',
+            //   displayFormats: {
+            //     day: 'yyyy MMM D'
+            //   }
+            // },
+            ticks: {
+              autoSkip: false,
+              callback: function(value, index, values) {
+                return value;
               }
-            }
+            },
+          //   gridLines : {
+          //     display : false,
+          // }
           }],
-          // yAxes: [{
-          //   ticks: {
-          //     beginAtZero: true
-          //   }
-          // }]
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            stacked: false
+          }]
         }
       }
     };
